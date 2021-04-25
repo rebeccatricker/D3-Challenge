@@ -56,3 +56,46 @@ d3.csv("data/data.csv").then(function(healthData) {
   chartGroup.append("g")
     .call(leftAxis);
 
+    // Append initial circles
+  var circlesGroup = chartGroup.selectAll("circle")
+  .data(healthData)
+  .enter()
+  .append("circle")
+  .attr("cx", d => xLinearScale(d.poverty))
+  .attr("cy", d => yLinearScale(d.healthcare))
+  .attr("r", 12)
+  .attr("fill", "teal")
+  .attr("opacity", ".6");
+
+// Add State abbreviation to circles 
+chartGroup.selectAll("text.text-circles")
+      .data(healthData)
+      .enter()
+      .append("text")
+      .classed("text-circles",true)
+      .text(d => d.abbr)
+      .attr("x", d => xLinearScale(d.poverty))
+      .attr("y", d => yLinearScale(d.healthcare))
+      .attr("dy",5)
+      .attr("text-anchor","middle")
+      .attr("font-size","12px")
+      .attr("fill", "white");
+
+// append y axis
+chartGroup.append("text")
+  .attr("transform", "rotate(-90)")
+  .attr("y", 0 - margin.left)
+  .attr("x", 0 - (height / 2))
+  .attr("dy", "1em")
+  .classed("axis-text", true)
+  .text("Lacks Healthcare (%)");
+  
+// append x axis
+chartGroup.append("text")
+  .attr("y", height + margin.bottom/2 - 10)
+  .attr("x", width / 2)
+  .attr("dy", "1em")
+  .classed("aText", true)
+  .text("Poverty Rate (%)");
+
+});
