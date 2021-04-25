@@ -96,6 +96,6 @@ chartGroup.append("text")
   .attr("x", width / 2)
   .attr("dy", "1em")
   .classed("aText", true)
-  .text("Poverty Rate (%)");
+  .text("In Poverty (%)");
 
 });
